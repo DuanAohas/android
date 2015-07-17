@@ -1,0 +1,84 @@
+apply plugin: 'com.android.application'
+
+
+//repositories {//支持java 依赖库管理（maven/ivy） 本地或是远程
+//    maven { url "http://mvn.mvn.com:8081/nexus/content/groups/ngc-admin-web-public/" }
+//    jcenter()
+//}
+android {
+    compileSdkVersion 22
+    buildToolsVersion "23.0.0 rc3"
+
+    defaultConfig {
+        applicationId "com.aohas.demoframework"
+        minSdkVersion 16
+        targetSdkVersion 22
+        versionCode 1
+        versionName "1.0"
+        manifestPlaceholders = [UMENG_APPKEY_VALUE: "default_channel", UMENG_CHANNEL_NAME:"defaultchannel"]  //传到 AndroidManifest.xml文件中
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+    lintOptions {//（手动添加）
+        abortOnError false//程序在buid的时候，会执行lint检查，有任何的错误或者警告提示，都会终止构建，我们可以将其关掉
+    }
+
+    signingConfigs {//(自动打包设备  手动添加)
+        release {//设置打正式包签名属性
+            storeFile file("/Users/keystore.KeyStore")
+            storePassword "keystore"
+            keyAlias "keystore"
+            keyPassword "keystore"
+        }
+    }
+    buildTypes {//（默认生成）
+        release {
+            minifyEnabled false // 替代的方式//是否执行代码混淆
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release//打正式包时运行签名文件 手动添加)
+        }
+    }
+
+    productFlavors {//多渠道打�?如项目不需要注释掉(手动添加)
+
+        cu_channelname1_55a8baa767e58e2e480024cf{//渠道  在这个里边可以替换掉 defaultConfig 中任何值 只要名称相同
+            versionCode = 2
+        }
+//        cu_channelname2_55a8baa767e58e2e480024cf{//渠道  在这个里边可以替换掉 defaultConfig 中任何值 只要名称相同
+//            versionCode = 3
+//        }
+        //给main 文件中传参数  把渠道名称按 下划线进行拆分  ，然后将拆分的数据传到 AndroidManifest.xml文件中
+        productFlavors.all { flavor ->
+            println '---------------' + name
+            def names = name.split('_')
+            flavor.manifestPlaceholders = [UMENG_CHANNEL_NAME: names[1],UMENG_APPKEY_VALUE: names[2]]
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    compile 'com.android.support:appcompat-v7:22.2.0'
+}
+
+// 处理 jar 和 库文件
+tasks.withType(com.android.build.gradle.tasks.PackageApplication) { pkgTask ->
+    pkgTask.jniFolders = new HashSet<File>()
+    pkgTask.jniFolders.add(new File(buildDir, 'native-libs'))
+}
+
+task nativeLibsToJar(type: Zip, description: 'create a jar archive of the native libs') {
+    destinationDir file("$buildDir/native-libs")
+    baseName 'native-libs'
+    extension 'jar'
+    from fileTree(dir: "${project.projectDir}/libs", include: '**/*.so')
+    into 'lib'
+}
+tasks.withType(JavaCompile) {
+    compileTask -> compileTask.dependsOn(nativeLibsToJar)
+}

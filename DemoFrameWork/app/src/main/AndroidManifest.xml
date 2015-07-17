@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.aohas.demoframework" >
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+
+
+        <!--UMENG_CHANNEL_NAME  grade 中传递过来参数-->
+        <meta-data  android:name="UMENG_CHANNEL"   android:value="${UMENG_CHANNEL_NAME}"/>
+        <meta-data android:name="UMENG_APPKEY" android:value="${UMENG_APPKEY_VALUE}" />
+
+
+    </application>
+
+    <!--权限添加-->
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.INTERNET" />
+    <!-- 允许应用程序联网，以便向我们的服务器端发送数据。 -->
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <!-- 获取用户手机的IMEI，用来唯一的标识用户。 -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <!-- 检测网络状态 -->
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 获取mac地址作为用户的备用唯一标识 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <!-- 缓存资源优先存入SDcard -->   <!-- 相机权限 -->
+    <uses-permission android:name="android.permission.MOUNT_UNMOUNT_FILESYSTEMS" />
+    <uses-permission android:name="android.permission.CAMERA" />
+    <uses-feature android:name="android.hardware.camera" />
+    <uses-feature android:name="android.hardware.camera.autofocus" />
+
+    <uses-permission android:name="android.permission.FLASHLIGHT" />
+    <uses-permission android:name="android.permission.READ_LOGS" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.INTERACT_ACROSS_USERS_FULL" />
+    <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+    <!-- 高德地图 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+    <!-- 发短信 -->
+    <uses-permission android:name="android.permission.SEND_SMS" />
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="ANDROID.PERMISSION.RECEIVE_SMS" />
+    <!-- Push service 运行需要的权限 -->
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <!-- 开机启动 -->
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <!-- 发送持久广播 -->
+    <uses-permission android:name="android.permission.BROADCAST_STICKY" />
+    <!-- 修改全局系统设置 -->
+    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+    <!-- 振动 -->
+    <uses-permission android:name="android.permission.VIBRATE" />
+
+    <!-- QQ、QQ空间所需权限 -->
+    <uses-permission android:name="android.permission.GET_TASKS" />
+</manifest>
