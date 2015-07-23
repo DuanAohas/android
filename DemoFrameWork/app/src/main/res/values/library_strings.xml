@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="library_day_name_format">EEE</string>
+    <string name="library_invalid_date">Date must be between %1$s and %2$s.</string>
+    <string name="library_month_name_format">MMMM yyyy</string>
+
+    <string name="library_pull_to_refresh_pull_label">下拉刷新…</string>
+    <string name="library_pull_to_refresh_release_label">松开即可刷新…</string>
+    <string name="library_pull_to_refresh_refreshing_label">正在载入…</string>
+
+    <!-- Just use standard Pull Down String when pulling up. These can be set for languages which require it -->
+    <string name="library_pull_to_refresh_from_bottom_pull_label">@string/library_pull_to_refresh_pull_label</string>
+    <string name="library_pull_to_refresh_from_bottom_release_label">@string/library_pull_to_refresh_release_label</string>
+    <string name="library_pull_to_refresh_from_bottom_refreshing_label">@string/library_pull_to_refresh_refreshing_label</string>
+
+    <string name="empty"></string>
+
+
+    <string name="header_hint_refresh_normal">下拉刷新</string>
+    <string name="header_hint_refresh_ready">松开即可刷新</string>
+    <string name="header_hint_refresh_loading">正在载入&#8230;</string>
+    <string name="header_hint_refresh_time">上次刷新时间：</string>
+    <string name="footer_hint_load_normal">加载更多</string>
+    <string name="footer_hint_load_ready">松开即可加载更多</string>
+</resources>
